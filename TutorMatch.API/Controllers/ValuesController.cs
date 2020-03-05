@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TutorMatch.API.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -21,6 +21,7 @@ namespace TutorMatch.API.Controllers
 
         }
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
