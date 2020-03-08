@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h3>{{user.username.charAt(0).toUpperCase() + user.username.slice(1)}}'s Profile</h3>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.username}}">
+        <div class="card-body">
+          <div>
+            <strong>Student or Tutor:</strong>
+            <p>{{user.studentTutor}}</p>
+          </div>
+          <div>
+            <strong>Location:</strong>
+            <p>{{user.city}}, {{user.state}}</p>
+          </div>
+          <div>
+            <strong>Year:</strong>
+            <p>{{user.year}}</p>
+          </div>
+          <div>
+            <strong>Gender:</strong>
+            <p>{{user.gender}}</p>
+          </div>
+          <div>
+            <strong>Rate Range:</strong>
+            <p>{{user.rateRange}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+            <button class="btn btn-primary w-100">Like</button>
+            <button class="btn btn-success w-100">Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="About {{user.username.charAt(0).toUpperCase() + user.username.slice(1)}}">
+            <h4>Description</h4>
+            <p>{{user.introduction}}</p>
+            <br><br>
+            <h5>Last Active:</h5>
+            <p>{{user.lastActive}}</p>
+            <h5>Member Since:</h5>
+            <p>{{user.created}}</p>
+          </tab>
+          <tab heading="Subjects">
+            <h4>Subjects</h4>
+            <p>{{user.subjects}}</p>
+          </tab>
+          <tab heading="Availability">
+            <h4>Availability</h4>
+            <p>{{user.availability}}</p>
+          </tab>
+          <tab heading="Messages">
+            <p>Messages will go here</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
