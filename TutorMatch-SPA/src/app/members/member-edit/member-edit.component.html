@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>Your Profile</h2>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="editForm.dirty" class="alert alert-info">You have made changes. Any unsaved changes will be lost.</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.username}}">
+        <div class="card-body">
+          <div>
+            <strong>Student or Tutor:</strong>
+            <p>{{user.studentTutor}}</p>
+          </div>
+          <div>
+            <strong>Location:</strong>
+            <p>{{user.city}}, {{user.state}}</p>
+          </div>
+          <div>
+            <strong>Year:</strong>
+            <p>{{user.year}}</p>
+          </div>
+          <div>
+            <strong>Gender:</strong>
+            <p>{{user.gender}}</p>
+          </div>
+          <div>
+            <strong>Rate Range:</strong>
+            <p>{{user.rateRange}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+            <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="About {{user.username.charAt(0).toUpperCase() + user.username.slice(1)}}">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+              <h4>Description</h4>
+              <textarea name="introduction"rows="6" class="form-control" 
+                [(ngModel)]="user.introduction"></textarea>
+              <h4>Subjects:</h4>
+              <textarea name="subjects"rows="3" class="form-control" 
+                [(ngModel)]="user.subjects"></textarea>
+              <h4>Availability:</h4>
+              <textarea name="availability"rows="3" class="form-control" 
+                [(ngModel)]="user.availability"></textarea>
+              <h4>Location:</h4>
+              <div class="form-inline">
+                <label for="city">City</label>
+                <input type="text" class="form-controll" name="city" [(ngModel)]="user.city">
+                <label for="state">State</label>
+                <input type="text" class="form-controll" name="state" [(ngModel)]="user.state">
+              </div>
+              <br>
+              <h4>Other:</h4>
+              <div class="form-inline">
+                <label for="rateRange">Rate Range</label>
+                <input type="text" class="form-controll" name="rateRange" [(ngModel)]="user.rateRange">
+                <label for="studentTutor">Student/Tutor</label>
+                <input type="text" class="form-controll" name="studentTutor" [(ngModel)]="user.studentTutor">
+              </div>
+              <br>
+              <div class="form-inline">
+                <label for="year">Year</label>
+                <input type="text" class="form-controll" name="year" [(ngModel)]="user.year">
+                <label for="gender">Gender</label>
+                <input type="text" class="form-controll" name="gender" [(ngModel)]="user.gender">
+              </div>
+            </form>
+          </tab>
+          <tab heading="Edit Photo">
+            <p>Photo edit will go here</p>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
