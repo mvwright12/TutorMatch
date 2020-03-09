@@ -10,6 +10,14 @@ namespace TutorMatch.API.Helpers
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value ; }
         }
+
+        public int UserId { get; set; }
+        public string StudentTutor { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Subjects { get; set; }
+        public string Availability { get; set; }
+        public string OrderBy { get; set; }
         
     }
 }

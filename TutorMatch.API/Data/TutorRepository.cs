@@ -45,7 +45,44 @@ namespace TutorMatch.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.Include(p => p.Photos);
+            var users = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
+
+            users = users.Where(u => u.Id != userParams.UserId);
+
+            users = users.Where(u => u.StudentTutor.ToLower() == userParams.StudentTutor.ToLower());
+
+            if (!string.IsNullOrEmpty(userParams.City))
+            {
+                users = users.Where(u => u.City.ToLower() == userParams.City.ToLower());
+            }
+
+            if (!string.IsNullOrEmpty(userParams.State))
+            {
+                users = users.Where(u => u.State.ToLower() == userParams.State.ToLower());
+            }
+
+            if (!string.IsNullOrEmpty(userParams.Subjects))
+            {
+                users = users.Where(u => u.Subjects.ToLower().Contains(userParams.Subjects.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(userParams.Availability))
+            {
+                users = users.Where(u => u.Availability.ToLower().Contains(userParams.Availability.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(userParams.OrderBy))
+            {
+                switch (userParams.OrderBy)
+                {
+                    case "created":
+                        users = users.OrderByDescending(u => u.Created);
+                        break;
+                        default:
+                        users = users.OrderByDescending(u => u.LastActive);
+                        break;
+                }
+            }
 
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }

@@ -6,12 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 
 @Component({
-  selector: "app-member-list",
-  templateUrl: "./member-list.component.html",
-  styleUrls: ["./member-list.component.css"]
+  selector: 'app-member-list',
+  templateUrl: './member-list.component.html',
+  styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
   users: User[];
+  user: User = JSON.parse(localStorage.getItem('user'));
+  studentTutorList = [{value: 'student', display: 'Students'}, {value: 'tutor', display: 'Tutors'}];
+  userParams: any = {};
   pagination: Pagination;
 
   constructor(
@@ -22,9 +25,16 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data["users"].result;
-      this.pagination = data["users"].pagination;
+      this.users = data['users'].result;
+      this.pagination = data['users'].pagination;
     });
+
+    this.userParams.studentTutor = this.user.studentTutor === 'student' ? 'tutor' : 'student';
+    this.userParams.city = '';
+    this.userParams.state = '';
+    this.userParams.subjects = '';
+    this.userParams.availability = '';
+    this.userParams.orderBy = 'lastActive';
   }
 
   pageChanged(event: any): void {
@@ -32,8 +42,17 @@ export class MemberListComponent implements OnInit {
     this.loadUsers();
   }
 
+  resetFilters() {
+    this.userParams.studentTutor = this.user.studentTutor === 'student' ? 'tutor' : 'student';
+    this.userParams.city = '';
+    this.userParams.state = '';
+    this.userParams.subjects = '';
+    this.userParams.availability = '';
+    this.loadUsers();
+  }
+
   loadUsers() {
-    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;
