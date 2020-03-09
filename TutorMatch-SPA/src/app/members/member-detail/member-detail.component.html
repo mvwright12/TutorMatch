@@ -45,9 +45,9 @@
             <p>{{user.introduction}}</p>
             <br><br>
             <h5>Last Active:</h5>
-            <p>{{user.lastActive}}</p>
+            <p>{{user.lastActive | timeAgo}}</p>
             <h5>Member Since:</h5>
-            <p>{{user.created}}</p>
+            <p>{{user.created | date: 'mediumDate'}}</p>
           </tab>
           <tab heading="Subjects">
             <h4>Subjects</h4>

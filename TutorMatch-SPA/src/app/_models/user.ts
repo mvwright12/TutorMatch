@@ -10,7 +10,7 @@ export interface User {
     availability: string;
     rateRange: string;
     created: Date;
-    lastActive: Date;
+    lastActive: any;
     photoUrl: string;
     city: string;
     state: string;

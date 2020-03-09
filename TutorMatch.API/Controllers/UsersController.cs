@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TutorMatch.API.Data;
 using TutorMatch.API.Dtos;
+using TutorMatch.API.Helpers;
 
 namespace TutorMatch.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
