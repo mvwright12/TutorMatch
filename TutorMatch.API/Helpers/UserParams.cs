@@ -18,6 +18,8 @@ namespace TutorMatch.API.Helpers
         public string Subjects { get; set; }
         public string Availability { get; set; }
         public string OrderBy { get; set; }
+        public bool Likees { get; set; } = false;
+        public bool Likers { get; set; } = false;
         
     }
 }
